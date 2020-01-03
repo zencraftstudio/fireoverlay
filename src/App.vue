@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <Map></Map>
+    <div id="wrapper">
+      <div id="data"></div>
+      <div id="map"><Map></Map></div>
+    </div>
   </div>
 </template>
 
@@ -19,7 +22,26 @@ export default {
 </script>
 
 <style>
-#app {
+html,
+body,
+#app,
+#wrapper {
+  height: 100%;
+  margin: 0;
+}
+#wrapper {
+  display: grid;
+  grid-template-columns: repeat(8, [col-start] 1fr);
+}
+#data {
+  grid-column: col-start 1 / span 3;
+  grid-row: 1;
+}
+#map {
+  grid-column: col-start 3 / span 7;
+  grid-row: 1;
+}
+/* #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -30,5 +52,5 @@ export default {
   right: 0;
   top: 0;
   bottom: 0;
-}
+} */
 </style>
