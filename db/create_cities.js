@@ -6,20 +6,19 @@ const citiesData = require("./data/cities.json");
 const Seeder = {
   seed: async () => {
     const serverClient = new faunadb.Client({
-      secret: process.env.FAUNADB_KEY
+      secret: process.env.FAUNADB_SERVER_KEY
     });
 
     citiesData.forEach(async cityData => {
       try {
-        const cityParams = {
-          name: cityData.city,
-          name_eng: cityData.city_ascii,
-          lat: cityData.lat,
-          long: cityData.long
-        };
         await serverClient.query(
           q.Create("cities", {
-            data: cityParams
+            data: {
+              name: cityData.city,
+              name_eng: cityData.city_ascii,
+              lat: cityData.lat,
+              lng: cityData.lng
+            }
           })
         );
         console.log(`City ${cityParams.name} created.`);
