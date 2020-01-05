@@ -27,6 +27,16 @@
             :options="cities"
           ></v-select>
         </div>
+        <div>
+          <p style="color:red">The red circle designates the area actively burned down.</p>
+          <p style="color:gray">The gray circle designates the area effected by the smoke.</p>
+        </div>
+        <div>
+          <small>
+            Made by
+            <a target="_blank" href="http://github.com/gokaykucuk/">gokaykucuk</a>
+          </small>
+        </div>
       </div>
       <div id="map">
         <Map ref="mainMap" :lat="lat" :lng="lng"></Map>
@@ -43,6 +53,7 @@ import { constants } from "buffer";
 import _ from "lodash";
 const faunadb = require("faunadb");
 const q = faunadb.query;
+import "./css/app.css";
 
 export default {
   name: "app",
@@ -88,37 +99,3 @@ export default {
   }
 };
 </script>
-
-<style>
-* {
-  font-family: "Quicksand", sans-serif;
-}
-html,
-body,
-#app,
-#wrapper {
-  height: 100%;
-  margin: 0;
-}
-#wrapper {
-  display: grid;
-  grid-template-columns: repeat(8, [col-start] 1fr);
-}
-#data {
-  padding: 30px;
-  grid-column: col-start 1 / span 2;
-  grid-row: 1;
-}
-#map {
-  grid-column: col-start 3 / span 7;
-  grid-row: 1;
-}
-.logo {
-  width: 30%;
-  margin-left: auto;
-  margin-right: auto;
-}
-.text-center {
-  text-align: center;
-}
-</style>
