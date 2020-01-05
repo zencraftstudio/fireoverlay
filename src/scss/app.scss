@@ -22,7 +22,7 @@ body,
 
   #data {
     padding: 1rem;
-    flex: 1 0 25%;
+    flex: 38vh;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -50,7 +50,7 @@ body,
   }
 
   #map {
-    flex: 1 0 75%;
+    flex: 62vh;
 
     @include md {
       flex: 1 0 64%;
@@ -136,6 +136,7 @@ body,
   p {
     font-size: .78em;
     font-weight: bold;
+    text-align: center;
   }
   @include md {
     flex-direction: column;
