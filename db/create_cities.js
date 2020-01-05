@@ -1,4 +1,6 @@
+const http = require("http");
 const faunadb = require("faunadb");
+const _ = require("lodash");
 const q = faunadb.query;
 
 const citiesData = require("./data/cities.json");
@@ -6,27 +8,28 @@ const citiesData = require("./data/cities.json");
 const Seeder = {
   seed: async () => {
     const serverClient = new faunadb.Client({
-      secret: process.env.FAUNADB_KEY
+      secret: "fnADhQm_vDACC0g2DkY2s8dvU4Kf5d6lrEvi8T1Q"
     });
 
-    citiesData.forEach(async cityData => {
+    for (let i = 0; i < citiesData.length; i++) {
+      const cityData = citiesData[i];
       try {
-        const cityParams = {
-          name: cityData.city,
-          name_eng: cityData.city_ascii,
-          lat: cityData.lat,
-          long: cityData.long
-        };
         await serverClient.query(
           q.Create("cities", {
-            data: cityParams
+            data: {
+              name: cityData.city,
+              name_eng: cityData.city_ascii,
+              lat: cityData.lat,
+              lng: cityData.lng,
+              population: cityData.population
+            }
           })
         );
-        console.log(`City ${cityParams.name} created.`);
+        console.log(`City ${cityData.city} created.`);
       } catch (e) {
         console.log(e);
       }
-    });
+    }
   }
 };
 
