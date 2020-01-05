@@ -8,7 +8,7 @@ const citiesData = require("./data/cities.json");
 const Seeder = {
   seed: async () => {
     const serverClient = new faunadb.Client({
-      secret: process.env.FAUNADB_SERVER_KEY
+      secret: "fnADhQm_vDACC0g2DkY2s8dvU4Kf5d6lrEvi8T1Q"
     });
 
     for (let i = 0; i < citiesData.length; i++) {
