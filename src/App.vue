@@ -22,6 +22,7 @@
           <v-select
             :value="selectedCity"
             @input="setSelectedCity"
+            @search="fetchCities"
             :clearable="false"
             label="name"
             :options="cities"
@@ -46,6 +47,8 @@
 </template>
 
 <script>
+import "./scss/app.scss";
+
 import "./utils/constants";
 import Map from "./components/Map.vue";
 import { Client } from "faunadb";
@@ -53,7 +56,6 @@ import { constants } from "buffer";
 import _ from "lodash";
 const faunadb = require("faunadb");
 const q = faunadb.query;
-import "./css/app.css";
 
 export default {
   name: "app",
@@ -95,6 +97,22 @@ export default {
         this.selectedCity.lng,
         63000
       );
+    },
+    async fetchCities(searchParam) {
+      if (searchParam.length < 100) {
+        return;
+      }
+      console.log(searchParam);
+      const client = new faunadb.Client({
+        secret: FAUNADB_CLIENT_KEY
+      });
+      const citiesResponse = await client.query(
+        q.Map(
+          q.Paginate(q.Match(q.Index("all_cities"))),
+          q.Lambda("X", q.If(q.StartsWith("An", q.Var("X")), q.Get(q.Var("X"))))
+        )
+      );
+      this.cities = citiesResponse.data.map(city => city.data);
     }
   }
 };
