@@ -9,25 +9,29 @@
             <p>Overlay wildfires to get a feeling about the size of the destruction.</p>
           </div>
         </div>
-        <div class="selector selector--fire">
-          <h2>Fire:</h2>
-          <v-select
-            value="2019 Australian Bushfires"
-            :clearable="false"
-            :options="['2019 Australian Bushfires']"
-          ></v-select>
+        
+        <div class="selectors">
+          <div class="selector selector--fire">
+            <h2>Fire:</h2>
+            <v-select
+              value="2019 Australian Bushfires"
+              :clearable="false"
+              :options="['2019 Australian Bushfires']"
+            ></v-select>
+          </div>
+          <div class="selector selector--city">
+            <h2>City:</h2>
+            <v-select
+              :value="selectedCity"
+              @input="setSelectedCity"
+              @search="fetchCities"
+              :clearable="false"
+              label="name"
+              :options="cities"
+            ></v-select>
+          </div>
         </div>
-        <div class="selector selector--city">
-          <h2>City:</h2>
-          <v-select
-            :value="selectedCity"
-            @input="setSelectedCity"
-            @search="fetchCities"
-            :clearable="false"
-            label="name"
-            :options="cities"
-          ></v-select>
-        </div>
+        
         <div class="notice">
           <p style="color:red">The red circle designates the area actively burned down.</p>
           <p style="color:gray">The gray circle designates the area effected by the smoke.</p>

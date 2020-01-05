@@ -29,17 +29,23 @@ body,
     // text-align: center;
 
     @include md {
-      flex: 1 0 35%;
+      flex: 36%;
       padding: initial;
       margin: 0 1rem;
     }
 
+    @include lg {
+      justify-content: initial;
+
+    }
+
     @include xl {
-      flex: 1 0 20%;
+      flex: 20%;
+
     }
 
     @include xxl {
-      flex: 1 0 15%;
+      flex: 15%;
     }
   }
 
@@ -47,7 +53,7 @@ body,
     flex: 1 0 75%;
 
     @include md {
-      flex: 1 0 65%;
+      flex: 1 0 64%;
     }
 
     @include xl {
@@ -75,19 +81,23 @@ body,
     margin: .5rem 0;
 
     @include md {
-      font-size: initial;
-      margin: 1.6rem 0;
+      font-size: .8em;
+      margin: 1rem 0;
     }
   }
 
   .logo {
     width: 36px;
+
     @include md {
-      width: 100px;
+      padding-top: 1rem;
+    }
+    @include xl {
+      width: 75px;
     }
   }
 
-  @include md {
+  @include xl {
     padding: initial;
     flex-direction: column;
 
