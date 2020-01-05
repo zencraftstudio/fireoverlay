@@ -3,16 +3,29 @@
     <div id="wrapper">
       <div id="data">
         <div>
-          <h1>Fire Overlay</h1>
+          <div class="text-center">
+            <img class="logo" src="./assets/logo.png" />
+            <h1>Fire Overlay</h1>
+          </div>
           <p>Overlay wildfires to get a feeling about the size of the destruction.</p>
         </div>
         <div>
           <h2>Fire:</h2>
-          <v-select selected="2019 Australian Bushfires" :options="['2019 Australian Bushfires']"></v-select>
+          <v-select
+            value="2019 Australian Bushfires"
+            :clearable="false"
+            :options="['2019 Australian Bushfires']"
+          ></v-select>
         </div>
         <div>
           <h2>City:</h2>
-          <v-select :value="selectedCity" @input="setSelectedCity" label="name" :options="cities"></v-select>
+          <v-select
+            :value="selectedCity"
+            @input="setSelectedCity"
+            :clearable="false"
+            label="name"
+            :options="cities"
+          ></v-select>
         </div>
       </div>
       <div id="map">
@@ -77,6 +90,9 @@ export default {
 </script>
 
 <style>
+* {
+  font-family: "Quicksand", sans-serif;
+}
 html,
 body,
 #app,
@@ -96,5 +112,13 @@ body,
 #map {
   grid-column: col-start 3 / span 7;
   grid-row: 1;
+}
+.logo {
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.text-center {
+  text-align: center;
 }
 </style>

@@ -38,7 +38,7 @@ export default {
   },
   computed: {
     smokeRadius: function() {
-      return this.fireRadius * 3;
+      return this.fireRadius * 5;
     }
   }
 };
