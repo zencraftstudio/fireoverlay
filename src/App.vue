@@ -2,12 +2,18 @@
   <div id="app">
     <div id="wrapper">
       <div id="data">
-        <v-select
-          :value="selectedCity"
-          @input="setSelectedCity"
-          label="name"
-          :options="cities"
-        ></v-select>
+        <div>
+          <h1>Fire Overlay</h1>
+          <p>Overlay wildfires to get a feeling about the size of the destruction.</p>
+        </div>
+        <div>
+          <h2>Fire:</h2>
+          <v-select selected="2019 Australian Bushfires" :options="['2019 Australian Bushfires']"></v-select>
+        </div>
+        <div>
+          <h2>City:</h2>
+          <v-select :value="selectedCity" @input="setSelectedCity" label="name" :options="cities"></v-select>
+        </div>
       </div>
       <div id="map">
         <Map ref="mainMap" :lat="lat" :lng="lng"></Map>
@@ -60,9 +66,10 @@ export default {
       this.updateLocation();
     },
     updateLocation() {
-      this.$refs.mainMap.updateFireLocation(
+      this.$refs.mainMap.updateSelection(
         this.selectedCity.lat,
-        this.selectedCity.lng
+        this.selectedCity.lng,
+        63000
       );
     }
   }
@@ -82,7 +89,8 @@ body,
   grid-template-columns: repeat(8, [col-start] 1fr);
 }
 #data {
-  grid-column: col-start 1 / span 3;
+  padding: 30px;
+  grid-column: col-start 1 / span 2;
   grid-row: 1;
 }
 #map {

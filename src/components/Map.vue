@@ -1,7 +1,8 @@
 <template>
   <l-map :zoom="zoom" :center="mapCenter">
     <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-    <l-circle :lat-lng="fireCenter" :radius="radius"></l-circle>
+    <l-circle fillColor="red" color="red" :lat-lng="fireCenter" :radius="fireRadius"></l-circle>
+    <l-circle fillColor="gray" color="gray" :lat-lng="fireCenter" :radius="smokeRadius"></l-circle>
   </l-map>
 </template>
 
@@ -17,25 +18,28 @@ export default {
   },
   props: ["lat", "lng"],
   methods: {
-    updateFireLocation(lat, lng) {
+    updateSelection(lat, lng, kmsq) {
       this.fireCenter = L.latLng(lat, lng);
       this.mapCenter = L.latLng(lat, lng);
+      this.fireRadius = Math.sqrt(kmsq / Math.PI) * 1000;
     }
   },
   data() {
     return {
-      zoom: 8,
+      zoom: 6,
       url:
         "https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png",
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      radius: 10,
+      fireRadius: Math.sqrt((12.35 * Math.pow(10, 6) * 4046.86) / Math.PI),
       fireCenter: L.latLng(this.lat, this.lng),
       mapCenter: L.latLng(this.lat, this.lng)
     };
   },
-  mounted() {
-    this.radius = Math.sqrt((12.35 * Math.pow(10, 6) * 4046.86) / Math.PI);
+  computed: {
+    smokeRadius: function() {
+      return this.fireRadius * 3;
+    }
   }
 };
 </script>
