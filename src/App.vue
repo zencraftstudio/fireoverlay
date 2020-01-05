@@ -2,37 +2,41 @@
   <div id="app">
     <div id="wrapper">
       <div id="data">
-        <div>
-          <div class="text-center">
+        <div >
+          <div class="logo-wrapper">
             <img class="logo" src="./assets/logo.png" />
             <h1>Fire Overlay</h1>
+            <p>Overlay wildfires to get a feeling about the size of the destruction.</p>
           </div>
-          <p>Overlay wildfires to get a feeling about the size of the destruction.</p>
         </div>
-        <div>
-          <h2>Fire:</h2>
-          <v-select
-            value="2019 Australian Bushfires"
-            :clearable="false"
-            :options="['2019 Australian Bushfires']"
-          ></v-select>
+        
+        <div class="selectors">
+          <div class="selector selector--fire">
+            <h2>Fire:</h2>
+            <v-select
+              value="2019 Australian Bushfires"
+              :clearable="false"
+              :options="['2019 Australian Bushfires']"
+            ></v-select>
+          </div>
+          <div class="selector selector--city">
+            <h2>City:</h2>
+            <v-select
+              :value="selectedCity"
+              @input="setSelectedCity"
+              @search="fetchCities"
+              :clearable="false"
+              label="name"
+              :options="cities"
+            ></v-select>
+          </div>
         </div>
-        <div>
-          <h2>City:</h2>
-          <v-select
-            :value="selectedCity"
-            @input="setSelectedCity"
-            @search="fetchCities"
-            :clearable="false"
-            label="name"
-            :options="cities"
-          ></v-select>
-        </div>
-        <div>
+        
+        <div class="notice">
           <p style="color:red">The red circle designates the area actively burned down.</p>
           <p style="color:gray">The gray circle designates the area effected by the smoke.</p>
         </div>
-        <div>
+        <div class="author">
           <small>
             Made by
             <a target="_blank" href="http://github.com/gokaykucuk/">gokaykucuk</a>
