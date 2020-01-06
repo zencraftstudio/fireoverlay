@@ -39,7 +39,8 @@
         <div class="author">
           <small>
             Made by
-            <a target="_blank" href="http://github.com/gokaykucuk/">gokaykucuk</a>
+            <a target="_blank" href="http://github.com/gokaykucuk/">gokaykucuk</a> &
+            <a target="_blank" href="http://fatihgozenc.com">fatihgozenc</a>
           </small>
         </div>
       </div>
