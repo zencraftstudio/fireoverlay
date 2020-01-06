@@ -2,14 +2,14 @@
   <div id="app">
     <div id="wrapper">
       <div id="data">
-        <div >
+        <div>
           <div class="logo-wrapper">
             <img class="logo" src="./assets/logo.png" />
             <h1>Fire Overlay</h1>
             <p>Overlay wildfires to get a feeling about the size of the destruction.</p>
           </div>
         </div>
-        
+
         <div class="selectors">
           <div class="selector selector--fire">
             <h2>Fire:</h2>
@@ -24,14 +24,14 @@
             <v-select
               :value="selectedCity"
               @input="setSelectedCity"
-              @search="fetchCities"
+              @search="onSearchCity"
               :clearable="false"
               label="name"
               :options="cities"
             ></v-select>
           </div>
         </div>
-        
+
         <div class="notice">
           <p style="color:red">The red circle designates the area actively burned down.</p>
           <p style="color:gray">The gray circle designates the area effected by the smoke.</p>
@@ -39,7 +39,8 @@
         <div class="author">
           <small>
             Made by
-            <a target="_blank" href="http://github.com/gokaykucuk/">gokaykucuk</a>
+            <a target="_blank" href="http://github.com/gokaykucuk/">gokaykucuk</a> &
+            <a target="_blank" href="http://fatihgozenc.com">fatihgozenc</a>
           </small>
         </div>
       </div>
@@ -91,33 +92,46 @@ export default {
     this.updateLocation();
   },
   methods: {
-    setSelectedCity(newCity) {
+    setSelectedCity: function(newCity) {
       this.selectedCity = newCity;
       this.updateLocation();
     },
-    updateLocation() {
+    onSearchCity: function(searchString, loading) {
+      if (searchString.length < 3) {
+        return;
+      }
+      loading(true);
+      this.searchCities(loading, searchString, this);
+    },
+    updateLocation: function() {
       this.$refs.mainMap.updateSelection(
         this.selectedCity.lat,
         this.selectedCity.lng,
         63000
       );
     },
-    async fetchCities(searchParam) {
-      if (searchParam.length < 100) {
-        return;
-      }
-      console.log(searchParam);
+    searchCities: _.debounce(async (loading, searchParam, vm) => {
       const client = new faunadb.Client({
         secret: FAUNADB_CLIENT_KEY
       });
       const citiesResponse = await client.query(
         q.Map(
-          q.Paginate(q.Match(q.Index("all_cities"))),
-          q.Lambda("X", q.If(q.StartsWith("An", q.Var("X")), q.Get(q.Var("X"))))
+          q.Filter(
+            q.Paginate(q.Match("all_cities"), { size: 16000 }),
+            q.Lambda(
+              "X",
+              q.StartsWith(
+                q.LowerCase(q.Select(["data", "name"], q.Get(q.Var("X")))),
+                searchParam
+              )
+            )
+          ),
+          q.Lambda("x", q.Get(q.Var("x")))
         )
       );
-      this.cities = citiesResponse.data.map(city => city.data);
-    }
+      vm.cities = citiesResponse.data.map(city => city.data);
+      loading(false);
+    }, 350)
   }
 };
 </script>
