@@ -103,17 +103,23 @@ export default {
       );
     },
     async fetchCities(searchParam) {
-      if (searchParam.length < 100) {
-        return;
-      }
+      // if (searchParam.length < 100) {
+      //   return;
+      // }
       console.log(searchParam);
       const client = new faunadb.Client({
         secret: FAUNADB_CLIENT_KEY
       });
       const citiesResponse = await client.query(
         q.Map(
-          q.Paginate(q.Match(q.Index("all_cities"))),
-          q.Lambda("X", q.If(q.StartsWith("An", q.Var("X")), q.Get(q.Var("X"))))
+          q.Filter(
+            q.Paginate(q.Match("all_cities"), { size: 16000 }),
+            q.Lambda(
+              "X",
+              q.StartsWith(q.Select(["data", "name"], q.Get(q.Var("X"))), "A")
+            )
+          ),
+          q.Lambda("x", q.Get(q.Var("x")))
         )
       );
       this.cities = citiesResponse.data.map(city => city.data);
