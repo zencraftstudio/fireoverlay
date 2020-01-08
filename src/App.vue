@@ -97,9 +97,11 @@ export default {
       this.updateLocation();
     },
     onSearchCity: function(searchString, loading) {
-      if (searchString.length < 3) {
+      if (!(searchString.length > 0 && searchString.length < 5)) {
         return;
       }
+      console.log("searchstring", searchString);
+      console.log("searchstring length", searchString.length);
       loading(true);
       this.searchCities(loading, searchString, this);
     },
@@ -114,21 +116,19 @@ export default {
       const client = new faunadb.Client({
         secret: FAUNADB_CLIENT_KEY
       });
+
       const citiesResponse = await client.query(
         q.Map(
-          q.Filter(
-            q.Paginate(q.Match("all_cities"), { size: 16000 }),
-            q.Lambda(
-              "X",
-              q.StartsWith(
-                q.LowerCase(q.Select(["data", "name"], q.Get(q.Var("X")))),
-                searchParam
-              )
+          q.Paginate(
+            q.Match(
+              q.Index(`cities_autocomplete_${searchParam.length}`),
+              searchParam
             )
           ),
-          q.Lambda("x", q.Get(q.Var("x")))
+          q.Lambda("X", q.Get(q.Var("X")))
         )
       );
+
       vm.cities = citiesResponse.data.map(city => city.data);
       loading(false);
     }, 350)
