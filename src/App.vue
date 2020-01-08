@@ -33,8 +33,10 @@
         </div>
 
         <div class="notice">
-          <p style="color:red">The red circle designates the area actively burned down.</p>
-          <p style="color:gray">The gray circle designates the area effected by the smoke.</p>
+          <p style="color:red">
+            The red circle designates the area actively burned down.
+            <span style="color:gray">The gray circle designates the area effected by the smoke.</span>
+          </p>
         </div>
         <div class="author">
           <small>

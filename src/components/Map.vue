@@ -25,7 +25,8 @@ export default {
       this.fireRadius = Math.sqrt(kmsq / Math.PI) * 1000;
     },
     startDrag: function(e) {
-      this.fireCenter = this.$refs.mapInstance.mapObject.getCenter();
+      //console.log(e.target);
+      this.fireCenter = e.target.getCenter();
     }
   },
   data() {
