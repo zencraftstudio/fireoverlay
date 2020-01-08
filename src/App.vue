@@ -124,7 +124,7 @@ export default {
           q.Paginate(
             q.Match(
               q.Index(`cities_autocomplete_${searchParam.length}`),
-              searchParam
+              q.LowerCase(searchParam)
             )
           ),
           q.Lambda("X", q.Get(q.Var("X")))
