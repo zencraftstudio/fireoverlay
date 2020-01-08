@@ -1,5 +1,5 @@
 <template>
-  <l-map :zoom="zoom" :center="mapCenter">
+  <l-map ref="mapInstance" :zoom="zoom" :center="mapCenter" @move="startDrag">
     <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
     <l-circle fillColor="red" color="red" :lat-lng="fireCenter" :radius="fireRadius"></l-circle>
     <l-circle fillColor="gray" color="gray" :lat-lng="fireCenter" :radius="smokeRadius"></l-circle>
@@ -9,6 +9,7 @@
 <script>
 import { LMap, LTileLayer, LCircle } from "vue2-leaflet";
 import "leaflet/dist/leaflet.css";
+import _ from "lodash";
 
 export default {
   components: {
@@ -18,10 +19,13 @@ export default {
   },
   props: ["lat", "lng"],
   methods: {
-    updateSelection(lat, lng, kmsq) {
+    updateSelection: function(lat, lng, kmsq) {
       this.fireCenter = L.latLng(lat, lng);
       this.mapCenter = L.latLng(lat, lng);
       this.fireRadius = Math.sqrt(kmsq / Math.PI) * 1000;
+    },
+    startDrag: function(e) {
+      this.fireCenter = this.$refs.mapInstance.mapObject.getCenter();
     }
   },
   data() {
