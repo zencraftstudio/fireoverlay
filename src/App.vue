@@ -35,7 +35,9 @@
         <div class="notice">
           <p style="color:red">
             The red circle designates the area actively burned down.
-            <span style="color:gray">The gray circle designates the area effected by the smoke.</span>
+            <span
+              style="color:gray"
+            >The gray circle designates the area effected by the smoke.</span>
           </p>
         </div>
         <div class="author">
@@ -102,8 +104,6 @@ export default {
       if (!(searchString.length > 0 && searchString.length < 5)) {
         return;
       }
-      console.log("searchstring", searchString);
-      console.log("searchstring length", searchString.length);
       loading(true);
       this.searchCities(loading, searchString, this);
     },
