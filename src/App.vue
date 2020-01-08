@@ -47,6 +47,23 @@
             <a target="_blank" href="http://fatihgozenc.com">fatihgozenc</a>
           </small>
         </div>
+        <div class="contribute">
+          <h3>Every dollar counts!</h3>
+          <p>
+            Currently the donations are over
+            <strong>140 mil. $</strong>
+          </p>
+          <br />
+          <a href="https://fundraise.redcross.org.au/drr">
+            Help with
+            <strong>RedCross</strong>
+          </a>
+          <br />
+          <a href="https://www.wwf.org.au/get-involved/bushfire-emergency">
+            Help with
+            <strong>WWF</strong>
+          </a>
+        </div>
       </div>
       <div id="map">
         <Map ref="mainMap" :lat="lat" :lng="lng"></Map>

@@ -157,3 +157,14 @@ body,
     font-size: initial;
   }
 }
+
+.contribute{
+	margin-top: 1em;
+	font-size: .9em;
+  padding-top: 4px;
+  text-align: center;
+
+  @include md {
+    font-size: initial;
+  }
+}
