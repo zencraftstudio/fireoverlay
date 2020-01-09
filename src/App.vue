@@ -37,7 +37,7 @@
             The red circle designates the area actively burned down.
             <span
               style="color:gray"
-            >The gray circle designates the area effected by the smoke.</span>
+            >The gray circle designates the area affected by the smoke.</span>
           </p>
         </div>
 
