@@ -21,7 +21,7 @@ body,
   }
 
   #data {
-    padding: 1rem;
+    padding: 1rem 1rem .2rem 1rem;
     flex: 38vh;
     display: flex;
     flex-direction: column;
@@ -41,7 +41,6 @@ body,
 
     @include xl {
       flex: 20%;
-
     }
 
     @include xxl {
@@ -50,7 +49,8 @@ body,
   }
 
   #map {
-    flex: 62vh;
+		flex: 62vh;
+		z-index: 0;
 
     @include md {
       flex: 1 0 64%;
@@ -70,32 +70,51 @@ body,
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  flex-wrap: wrap;
-  padding: 0 30px;
+
+  @include md {
+		padding: 0 30px;
+		flex-wrap: wrap;
+	}
+	
+	@include lg {
+		padding: 1.5rem;
+	}
 
   p {
     font-size: .7em;
     text-transform: uppercase;
     font-weight: bold;
-    text-align: center;
-    margin: .5rem 0;
+    // margin: .5rem 0;
 
     @include md {
+	    text-align: center;
       font-size: .8em;
       margin: 1rem 0;
     }
   }
 
   .logo {
-    width: 36px;
+    width: 25px;
 
     @include md {
-      padding-top: 1rem;
+		width: 36px;
     }
     @include xl {
+			padding-top: 1rem;
       width: 75px;
     }
   }
+
+  h1 {
+		font-size: 1.4rem;
+		line-height: .9;
+		padding: 0 1rem;
+		
+		@include md {
+			margin: 1rem 0 0 0;
+		}
+	}
+	
 
   @include xl {
     padding: initial;
@@ -106,39 +125,70 @@ body,
       font-size: 2.6rem;
     }
   }
-  
+}
+
+.selectors {
+	margin: .5rem 0 0 0;
 }
 
 .selector {
   padding: 4px 0;
   display: flex;
   align-content: center;
-  justify-content: space-evenly;
+	justify-content: space-evenly;
+	align-items: center;
   @include md {
+		align-items: initial;
     flex-direction: column;
   }
   h2 {
     flex: 1 0 15%;
-    font-size: 1.2rem;
-    margin: 0;
+    font-size: 1rem;
+		margin: 0;
+		
+		@include md {
+			font-size: initial;
+		}
   }
   .v-select {
-    flex: 1 0 85%;
+		flex: 1 0 85%;
+		font-size: .8rem;
     @include md {
+			font-size: initial;
       margin: 1rem 0;
     }
   }
 }
 
 .notice {
-  display: flex;
+	position: absolute;
+	z-index: 1;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	background: #fff;
+	width: 100%;
+	span {
+		display: block;
+	}
  
   p {
-    font-size: .78em;
-    font-weight: bold;
-    text-align: center;
-  }
+		font-size: .78em;
+		@media (max-width: 340px) {
+			font-size: .7em;
+		}
+		padding: .5rem;
+		font-weight: bold;
+		text-align: center;
+		margin: 0 auto;
+	}
+	
   @include md {
+		margin: initial;
+		font-size: .8em;
+		position: initial;
+    bottom: initial;
+    left: initial;
     flex-direction: column;
     p{
       font-size: initial;
@@ -150,21 +200,52 @@ body,
 
 .author {
   font-size: .9em;
-  padding-top: 4px;
+  padding: 4px 0 0 0;
   text-align: center;
 
   @include md {
     font-size: initial;
-  }
+	}
+	
+	@include xl {
+		padding: 1rem;
+	}
 }
 
 .contribute{
-	margin-top: 1em;
-	font-size: .9em;
-  padding-top: 4px;
-  text-align: center;
+	// margin-top: 1em;
+	font-size: .8em;
+	text-align: center;
+	h3 {
+		font-size: .9rem;
+		text-transform: uppercase;
+		letter-spacing: 1.6px;
+	}
 
   @include md {
+		margin-top: 1em;
+		padding-top: 4px;
+		font-size: .9em;
     font-size: initial;
-  }
+	}
+	
+	@include xl {
+		p > strong {
+			display: block;
+		}
+	}
+}
+
+.contribute-links {
+	padding-top: .5rem;
+	display: flex;
+	justify-content: space-evenly;
+	@include md {
+		flex-direction: column;
+	}
+	@include xl {
+		a {
+			padding: .3rem;
+		}
+	}
 }

@@ -40,29 +40,31 @@
             >The gray circle designates the area effected by the smoke.</span>
           </p>
         </div>
-        <div class="author">
-          <small>
-            Made by
-            <a target="_blank" href="http://github.com/gokaykucuk/">gokaykucuk</a> &
-            <a target="_blank" href="http://fatihgozenc.com">fatihgozenc</a>
-          </small>
-        </div>
+
         <div class="contribute">
           <h3>Every dollar counts!</h3>
           <p>
             Currently the donations are over
             <strong>140 mil. $</strong>
           </p>
-          <br />
-          <a href="https://fundraise.redcross.org.au/drr">
-            Help with
-            <strong>RedCross</strong>
-          </a>
-          <br />
-          <a href="https://www.wwf.org.au/get-involved/bushfire-emergency">
-            Help with
-            <strong>WWF</strong>
-          </a>
+          <div class="contribute-links">
+            <a href="https://fundraise.redcross.org.au/drr">
+              Help with
+              <strong>RedCross</strong>
+            </a>
+            <a href="https://www.wwf.org.au/get-involved/bushfire-emergency">
+              Help with
+              <strong>WWF</strong>
+            </a>
+          </div>
+        </div>
+
+        <div class="author">
+          <small>
+            Made by
+            <a target="_blank" href="http://github.com/gokaykucuk/">gokaykucuk</a> &
+            <a target="_blank" href="http://fatihgozenc.com">fatihgozenc</a>
+          </small>
         </div>
       </div>
       <div id="map">
